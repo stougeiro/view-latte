@@ -38,7 +38,7 @@
             try {
                 $temporary_directory = config('view.temporary_directory');
             } catch (Throwable $e) {
-                $temporary_directory = sys_get_temp_dir();
+                $temporary_directory = sys_get_temp_dir() . DIRECTORY_SEPARATOR;
             }
 
             $this->setTempDirectory($temporary_directory);
