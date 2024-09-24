@@ -11,11 +11,13 @@
 
     class ViewLatteHandler implements ViewHandlerInterface
     {
-        protected array $storage = [];
-
         protected string $storage_separator = ':';
 
         protected string $file_extension = '.html';
+
+        protected string $environment = '';
+
+        protected array $storage = [];
 
         protected array $data = [];
 
@@ -25,6 +27,12 @@
         public function __construct()
         {
             $this->latte = new Engine();
+
+            $this->latte->addFunction('view', function(string $filepath)
+            {
+                return $this->getTemplatePath($filepath);
+            });
+
 
             try {
                 $this->storage_separator = config('view.storage_separator');
@@ -42,6 +50,17 @@
             }
 
             $this->setTempDirectory($temporary_directory);
+
+
+            try {
+                $this->environment = env('environment');
+            } catch (Throwable $e) { }
+
+            if ($this->environment == 'production') {
+                $this->latte->setAutoRefresh(false);
+                $this->latte->setStrictParsing();
+                $this->latte->setStrictTypes();
+            }
         }
 
 
@@ -72,6 +91,30 @@
 
         public function compile(string $filepath, array $data = []): string
         {
+            $this->compose($data);
+
+            return $this->latte->renderToString( $this->getTemplatePath($filepath), $this->data);
+        }
+
+        public function render(string $filepath, array $data = []): void
+        {
+            echo $this->compile($filepath, $data);
+        }
+
+
+        protected function setTempDirectory(string $temporary_directory): void
+        {
+            $temp = StorageValue::create($temporary_directory);
+
+            if ( ! $temp->isValid()) {
+                throw new ViewException("View: '{$temp->get()}' not found or not is a valid directory");
+            }
+
+            $this->latte->setTempDirectory($temp->get());
+        }
+
+        protected function getTemplatePath(string $filepath): string
+        {
             if (strpos($filepath, $this->storage_separator)) {
                 list($storage, $filepath) = explode($this->storage_separator, $filepath);
 
@@ -90,25 +133,6 @@
                 throw new ViewException("View: '{$filepath}' not found");
             }
 
-            $this->compose($data);
-
-            return $this->latte->renderToString($filepath, $this->data);
-        }
-
-        public function render(string $filepath, array $data = []): void
-        {
-            echo $this->compile($filepath, $data);
-        }
-
-
-        protected function setTempDirectory(string $temporary_directory): void
-        {
-            $temp = StorageValue::create($temporary_directory);
-
-            if ( ! $temp->isValid()) {
-                throw new ViewException("View: '{$temp->get()}' not found or not is a valid directory");
-            }
-
-            $this->latte->setTempDirectory($temp->get());
+            return $filepath;
         }
     }
