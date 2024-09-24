@@ -6,6 +6,7 @@
     use STDW\View\Latte\ValueObject\StorageValue;
     use STDW\Support\Str;
     use Latte\Engine;
+    use Throwable;
 
 
     class ViewLatteHandler implements ViewHandlerInterface
@@ -24,6 +25,23 @@
         public function __construct()
         {
             $this->latte = new Engine();
+
+            try {
+                $this->storage_separator = config('view.storage_separator');
+            } catch (Throwable $e) { }
+
+            try {
+                $this->file_extension = config('view.file_extension');
+            } catch (Throwable $e) { }
+
+
+            try {
+                $temporary_directory = config('view.temporary_directory');
+            } catch (Throwable $e) {
+                $temporary_directory = sys_get_temp_dir();
+            }
+
+            $this->setTempDirectory($temporary_directory);
         }
 
 
@@ -31,18 +49,6 @@
         {
             return $this->latte;
         }
-
-        public function setTempDirectory(string $temporary_directory): void
-        {
-            $temp = StorageValue::create($temporary_directory);
-
-            if ( ! $temp->isValid()) {
-                throw new ViewException("View: '{$temp->get()}' not found or not is a valid directory");
-            }
-
-            $this->latte->setTempDirectory($temp->get());
-        }
-
 
         public function setStorage(string $name, string $path): void
         {
@@ -92,5 +98,17 @@
         public function render(string $filepath, array $data = []): void
         {
             echo $this->compile($filepath, $data);
+        }
+
+
+        protected function setTempDirectory(string $temporary_directory): void
+        {
+            $temp = StorageValue::create($temporary_directory);
+
+            if ( ! $temp->isValid()) {
+                throw new ViewException("View: '{$temp->get()}' not found or not is a valid directory");
+            }
+
+            $this->latte->setTempDirectory($temp->get());
         }
     }

@@ -2,8 +2,6 @@
 
     namespace STDW\View\Latte;
 
-    defined('TEMP') or define('TEMP', sys_get_temp_dir());
-
     use STDW\Contract\ServiceProviderAbstracted;
     use STDW\View\Contract\ViewInterface;
     use STDW\View\Contract\ViewHandlerInterface;
@@ -15,23 +13,12 @@
         public function register(): void
         {
             $this->app->singleton(ViewInterface::class, View::class);
-            $this->app->singleton(ViewHandlerInterface::class, function() {
-                $handler = new ViewLatteHandler();
-                $handler->setTempDirectory(TEMP);
-
-                return $handler;
-            });
-
-            $this->app::macro('view', function() {
-                return $this->app->make(ViewInterface::class);
-            });
+            $this->app->singleton(ViewHandlerInterface::class, ViewLatteHandler::class);
         }
 
         public function boot(): void
-        {
-        }
+        { }
 
         public function terminate(): void
-        {
-        }
+        { }
     }
