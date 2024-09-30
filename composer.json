@@ -19,6 +19,6 @@
         "latte/latte": "3.0.18",
         "stougeiro/valueobject": "0.1.0",
         "stougeiro/support": "0.1.0",
-        "stougeiro/view": "0.6.2"
+        "stougeiro/view": "0.7.0"
     }
 }

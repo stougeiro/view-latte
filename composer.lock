@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "19239ac31965f247e7f146669c7f9fc4",
+    "content-hash": "7274da5e2e2e18e6fe01ff31a674c61b",
     "packages": [
         {
             "name": "latte/latte",
@@ -187,16 +187,16 @@
         },
         {
             "name": "stougeiro/contract",
-            "version": "v0.5.2",
+            "version": "v0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stougeiro/contract.git",
-                "reference": "5f07921931b05c0ec28191a155112910f7168a1a"
+                "reference": "fb539622810639f8ba1aba8407beb4119dc586ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stougeiro/contract/zipball/5f07921931b05c0ec28191a155112910f7168a1a",
-                "reference": "5f07921931b05c0ec28191a155112910f7168a1a",
+                "url": "https://api.github.com/repos/stougeiro/contract/zipball/fb539622810639f8ba1aba8407beb4119dc586ee",
+                "reference": "fb539622810639f8ba1aba8407beb4119dc586ee",
                 "shasum": ""
             },
             "require": {
@@ -224,9 +224,9 @@
             ],
             "support": {
                 "issues": "https://github.com/stougeiro/contract/issues",
-                "source": "https://github.com/stougeiro/contract/tree/v0.5.2"
+                "source": "https://github.com/stougeiro/contract/tree/v0.6.0"
             },
-            "time": "2024-09-26T02:24:16+00:00"
+            "time": "2024-09-30T22:45:05+00:00"
         },
         {
             "name": "stougeiro/support",
@@ -308,21 +308,21 @@
         },
         {
             "name": "stougeiro/view",
-            "version": "v0.6.2",
+            "version": "v0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stougeiro/view.git",
-                "reference": "2c126ac31779c80c0d563f4ec14056d9fe832f80"
+                "reference": "584d148545a2d320e7beb04dfc90dddadaebb5a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stougeiro/view/zipball/2c126ac31779c80c0d563f4ec14056d9fe832f80",
-                "reference": "2c126ac31779c80c0d563f4ec14056d9fe832f80",
+                "url": "https://api.github.com/repos/stougeiro/view/zipball/584d148545a2d320e7beb04dfc90dddadaebb5a2",
+                "reference": "584d148545a2d320e7beb04dfc90dddadaebb5a2",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.1",
-                "stougeiro/contract": "0.5.2",
+                "stougeiro/contract": "0.6.0",
                 "stougeiro/support": "0.1.0",
                 "stougeiro/valueobject": "0.1.0",
                 "stougeiro/view-contract": "0.3.0"
@@ -348,9 +348,9 @@
             ],
             "support": {
                 "issues": "https://github.com/stougeiro/view/issues",
-                "source": "https://github.com/stougeiro/view/tree/v0.6.2"
+                "source": "https://github.com/stougeiro/view/tree/v0.7.0"
             },
-            "time": "2024-09-26T02:29:39+00:00"
+            "time": "2024-09-30T23:03:50+00:00"
         },
         {
             "name": "stougeiro/view-contract",
