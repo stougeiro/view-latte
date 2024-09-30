@@ -115,14 +115,14 @@
 
         protected function getTemplatePath(string $filepath): string
         {
+            if (strpos($filepath, '.')) {
+                $filepath = str_replace('.', DIRECTORY_SEPARATOR, $filepath);
+            }
+
             if (strpos($filepath, $this->storage_separator)) {
                 list($storage, $filepath) = explode($this->storage_separator, $filepath);
 
                 $filepath = ($this->storage[$storage] ?? null) . $filepath;
-            }
-
-            if (strpos($filepath, '.')) {
-                $filepath = str_replace('.', DIRECTORY_SEPARATOR, $filepath);
             }
 
             if ( ! strpos($filepath, $this->file_extension)) {
