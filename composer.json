@@ -18,7 +18,7 @@
         "php": "^8.1",
         "latte/latte": "3.0.18",
         "stougeiro/valueobject": "0.1.0",
-        "stougeiro/support": "0.1.0",
-        "stougeiro/view": "0.7.0"
+        "stougeiro/support": "0.2.0",
+        "stougeiro/view": "0.7.1"
     }
 }
